@@ -26,6 +26,7 @@ Baumann_fit <- lm(post.test.1 ~ 0 + group + pretest.1, data=Baumann)
 ```
 
 ```{r}
+# no adjustment
 Wald_test(
     Baumann_fit,
     constraints = constrain_pairwise("group", reg_ex = TRUE),
@@ -37,10 +38,12 @@ Wald_test(
 ```
 
 ```{r}
+# view available adjustment methods
 p.adjust.methods
 ```
 
 ```{r}
+# adjustment with holm
 Wald_test(
     Baumann_fit,
     constraints = constrain_pairwise("group", reg_ex = TRUE),
@@ -62,6 +65,7 @@ lm_fit <- lm(weight ~ 0 + Diet + Time:Diet, data = ChickWeight)
 ```
 
 ```{r}
+# no adjustment, notice commented out code. Will still behave the same.
 linear_contrast(lm_fit,
                          vcov = "CR2",
                          cluster = ChickWeight$Chick,
@@ -72,10 +76,7 @@ linear_contrast(lm_fit,
 ```
 
 ```{r}
-p.adjust.methods
-```
-
-```{r}
+# adjustment with BY
 linear_contrast(lm_fit,
                          vcov = "CR2",
                          cluster = ChickWeight$Chick,
