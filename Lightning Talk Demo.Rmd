@@ -1,0 +1,86 @@
+---
+title: "Lightning Talk Demo"
+author: "Sam Pekofsky"
+output: html_document
+---
+
+```{r}
+# install clubSandwich if not installed
+if (!requireNamespace("clubSandwich", quietly = TRUE)) {
+  install.packages("clubSandwich")
+}
+
+# import clubSandwich package
+library(clubSandwich)
+```
+
+# Wald_test()
+
+```{r}
+# load data
+data(Baumann, package = "carData")
+Baumann$id <- 1:nrow(Baumann)
+
+# create linear regression model
+Baumann_fit <- lm(post.test.1 ~ 0 + group + pretest.1, data=Baumann)
+```
+
+```{r}
+Wald_test(
+    Baumann_fit,
+    constraints = constrain_pairwise("group", reg_ex = TRUE),
+    vcov = "CR2",
+    cluster = Baumann$id,
+    test = "HTZ",
+    adjustment_method = "none"
+  )
+```
+
+```{r}
+p.adjust.methods
+```
+
+```{r}
+Wald_test(
+    Baumann_fit,
+    constraints = constrain_pairwise("group", reg_ex = TRUE),
+    vcov = "CR2",
+    cluster = Baumann$id,
+    test = "HTZ",
+    adjustment_method = "holm"
+  )
+```
+
+# linear_contrast()
+
+```{r}
+# load data
+data("ChickWeight", package = "datasets")
+
+# create linear regression model
+lm_fit <- lm(weight ~ 0 + Diet + Time:Diet, data = ChickWeight)
+```
+
+```{r}
+linear_contrast(lm_fit,
+                         vcov = "CR2",
+                         cluster = ChickWeight$Chick,
+                         contrasts = constrain_pairwise("Diet.:Time",
+                                                        reg_ex = TRUE),
+                         p_values = TRUE)#, 
+                         # adjustment_method = "none")
+```
+
+```{r}
+p.adjust.methods
+```
+
+```{r}
+linear_contrast(lm_fit,
+                         vcov = "CR2",
+                         cluster = ChickWeight$Chick,
+                         contrasts = constrain_pairwise("Diet.:Time",
+                                                        reg_ex = TRUE),
+                         p_values = TRUE, 
+                         adjustment_method = "BY")
+```
