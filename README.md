@@ -1,6 +1,6 @@
 # Samuel Pekofsky
 
-## This is my README, which I have made to get access to github education.
+## Please check out [my website](https://pekofsky.github.io/)!
 
 <!--
 **pekofsky/pekofsky** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
