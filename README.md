@@ -1,6 +1,6 @@
 # Samuel Pekofsky
 
-## Please check out [my website](https://pekofsky.github.io/)!
+## Please visit [my website](https://pekofsky.github.io/)!
 
 <!--
 **pekofsky/pekofsky** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
